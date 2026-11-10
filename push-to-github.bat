@@ -15,3 +15,4 @@ if %ERRORLEVEL% EQU 0 (
     echo Push encountered an error or needs browser authentication.
 )
 pause
+
