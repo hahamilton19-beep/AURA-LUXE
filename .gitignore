@@ -1,0 +1,9 @@
+# Executables & Binaries
+cloudflared.exe
+*.exe
+
+# Logs & Temp files
+*.log
+.DS_Store
+Thumbs.db
+

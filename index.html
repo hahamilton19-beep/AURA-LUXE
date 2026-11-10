@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book world-class private luxury villas, penthouses, alpine chalets, private aviation, superyacht charters, and Michelin dining online with Aura Luxe." />
+  <meta name="keywords" content="luxury hotel booking, private villa rental, chalet booking, private jet charter, superyacht charter, concierge service online" />
+  <meta name="author" content="Aura Luxe Hospitality Group" />
+  <title>AURA LUXE | Luxury Hotels, Private Villas & Curated Concierge Services</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- =========================================================================
+       NAVIGATION BAR
+       ========================================================================= -->
+  <header class="navbar" id="mainNavbar">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" id="brandLogoLink">
+        <div class="brand-icon">A</div>
+        <div>
+          <span class="brand-name">AURA LUXE</span>
+          <span class="brand-tagline">Hotels &amp; Concierge</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#stays" class="nav-link active">Curated Stays</a></li>
+          <li><a href="#services" class="nav-link">VIP Services</a></li>
+          <li><a href="#bespoke" class="nav-link">Bespoke Itinerary</a></li>
+          <li><a href="#accolades" class="nav-link">Accolades</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Currency, Theme, Wishlist, My Bookings) -->
+      <div class="nav-actions">
+        <!-- Currency Selector -->
+        <select class="select-clean" id="currencySelector" aria-label="Select Currency">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="AED">AED (د.إ)</option>
+        </select>
+
+        <!-- Theme Toggle -->
+        <button class="btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+
+        <!-- Wishlist Drawer Trigger -->
+        <button class="btn-icon" id="wishlistDrawerBtn" onclick="openDrawer('wishlist')" title="Saved Collection" aria-label="View Saved Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span class="badge-count" id="wishlistCountBadge">0</span>
+        </button>
+
+        <!-- My Bookings Drawer Trigger -->
+        <button class="btn btn-secondary" id="myBookingsBtn" onclick="openDrawer('bookings')" style="padding: 10px 18px; font-size: 0.88rem;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Reservations
+          <span class="badge-count" id="bookingsCountBadge" style="position:static; margin-left:6px;">0</span>
+        </button>
+
+        <!-- Owner Studio Button -->
+        <button class="btn-owner" id="ownerStudioNavBtn" onclick="openOwnerStudio()" title="Platform Management & Price Controls">
+          <span class="pulse-dot"></span>
+          <span>⚡ Owner Studio</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         HERO SECTION
+         ========================================================================= -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-background">
+        <img src="assets/images/hero.jpg" alt="Aura Luxe Resort Infinity Pool" class="hero-bg-img" />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="container hero-content">
+        <div class="hero-pill">
+          <span>✦</span> FORBES TRAVEL GUIDE VERIFIED &bull; 2026 COLLECTION
+        </div>
+        <h1 class="hero-title">
+          Where Extraordinary <br />
+          <span class="gold-gradient-text">Meets Effortless</span>
+        </h1>
+        <p class="hero-subtitle">
+          Reserve premier private villas, cliffside sanctuaries, private aviation charters, and bespoke Michelin dining with seamless live availability and 24/7 dedicated concierge.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SMART BOOKING & SEARCH DOCK
+         ========================================================================= -->
+    <section class="container booking-dock-container" id="searchDock">
+      <div class="booking-dock">
+        <!-- Category Filter Pills -->
+        <div class="dock-category-pills">
+          <button class="category-pill active" data-category="all">
+            <span>✨</span> All Curations
+          </button>
+          <button class="category-pill" data-category="villas">
+            <span>🏖️</span> Private Villas
+          </button>
+          <button class="category-pill" data-category="chalets">
+            <span>⛷️</span> Alpine Chalets
+          </button>
+          <button class="category-pill" data-category="penthouses">
+            <span>🏙️</span> City Penthouses
+          </button>
+          <button class="category-pill" data-category="aviation-yachts">
+            <span>✈️</span> Jets &amp; Superyachts
+          </button>
+          <button class="category-pill" data-category="dining">
+            <span>🍷</span> Michelin Private Dining
+          </button>
+          <button class="category-pill" data-category="wellness">
+            <span>🌿</span> Thermal Spa &amp; Wellness
+          </button>
+        </div>
+
+        <!-- Input Fields Grid -->
+        <div class="dock-inputs-grid">
+          <!-- Search / Destination Field -->
+          <div class="dock-field">
+            <label for="dockSearch">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Destination or Service
+            </label>
+            <input type="text" id="dockSearch" placeholder="e.g. Bora Bora, Zermatt, Monaco, Jet..." />
+          </div>
+
+          <!-- Check-In Date -->
+          <div class="dock-field">
+            <label for="dockCheckIn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Check-In / Start
+            </label>
+            <input type="date" id="dockCheckIn" />
+          </div>
+
+          <!-- Check-Out Date -->
+          <div class="dock-field">
+            <label for="dockCheckOut">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Check-Out / End
+            </label>
+            <input type="date" id="dockCheckOut" />
+          </div>
+
+          <!-- Guests / Capacity -->
+          <div class="dock-field">
+            <label for="dockGuests">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Guests &amp; Party
+            </label>
+            <select id="dockGuests">
+              <option value="1">1 Distinguished Guest</option>
+              <option value="2" selected>2 Guests (Couples Suite)</option>
+              <option value="4">4 Guests (Family / Friends)</option>
+              <option value="8">6-8 Guests (Private Estate)</option>
+              <option value="12">10+ Guests (Full Charter)</option>
+            </select>
+          </div>
+
+          <!-- Search Action Button -->
+          <button class="btn btn-primary" onclick="renderCatalog()" style="height: 52px; padding: 0 26px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Explore
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CATALOG & EXPERIENCES LISTINGS SECTION
+         ========================================================================= -->
+    <section class="container" id="stays" style="scroll-margin-top: 100px;">
+      <!-- Catalog Controls & Filters -->
+      <div class="catalog-controls">
+        <div class="catalog-info">
+          <h2 class="catalog-title">Premier Stays &amp; Services</h2>
+          <span class="catalog-count" id="catalogCount">Loading curations...</span>
+        </div>
+
+        <div class="catalog-filters">
+          <!-- Price Range Slider -->
+          <div class="price-slider-box">
+            <span>Up to: <strong id="priceSliderVal" style="color:var(--accent-gold);">$10,000</strong></span>
+            <input type="range" id="priceSlider" min="500" max="10000" step="250" value="10000" aria-label="Maximum Price Slider" />
+          </div>
+
+          <!-- Quick Amenity Filters -->
+          <div class="filter-chip-group">
+            <button class="filter-chip" data-amenity="Private Pool">Private Pool</button>
+            <button class="filter-chip" data-amenity="Oceanfront">Oceanfront</button>
+            <button class="filter-chip" data-amenity="Private Butler">Private Butler</button>
+            <button class="filter-chip" data-amenity="Michelin Chef">Michelin Chef</button>
+            <button class="filter-chip" data-amenity="Ski-in">Ski-in / Out</button>
+            <button class="filter-chip" data-amenity="Spa">Wellness Spa</button>
+          </div>
+
+          <!-- Sort Selector -->
+          <select class="select-clean" id="sortSelector" aria-label="Sort by">
+            <option value="recommended">Curator's Choice</option>
+            <option value="rating">Highest Rated (★)</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Dynamic Listings Grid -->
+      <div class="listings-grid" id="listingsGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         BESPOKE SERVICES SHOWCASE (Beyond Stays)
+         ========================================================================= -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Beyond Accommodation</span>
+          <h2 class="section-title">The Aura Concierge Difference</h2>
+          <p class="section-desc">
+            We curate holistic journeys where every luxury detail is coordinated seamlessly under a single private client folio.
+          </p>
+        </div>
+
+        <div class="services-feature-grid">
+          <!-- Feature 1: Private Aviation -->
+          <div class="service-card">
+            <div class="service-icon-box">✈️</div>
+            <h3 class="service-title">Executive Jet Charters</h3>
+            <p class="service-desc">
+              Direct ramp transfers, zero security queues, and on-demand heavy jets departing from private FBO terminals worldwide.
+            </p>
+            <span class="service-link" onclick="openDetailModal('service-gulfstream-jet')">
+              Explore Aviation Charters &rarr;
+            </span>
+          </div>
+
+          <!-- Feature 2: Superyacht Charters -->
+          <div class="service-card">
+            <div class="service-icon-box">🛥️</div>
+            <h3 class="service-title">Superyacht Day Charters</h3>
+            <p class="service-desc">
+              Sail the azure waters of Monaco, Saint-Tropez, Amalfi, or the Caribbean with a private captain, crew, and water toys.
+            </p>
+            <span class="service-link" onclick="openDetailModal('service-aurelia-yacht')">
+              Charter Aurelia &rarr;
+            </span>
+          </div>
+
+          <!-- Feature 3: In-Residence Michelin Dining -->
+          <div class="service-card">
+            <div class="service-icon-box">👨‍🍳</div>
+            <h3 class="service-title">Michelin In-Villa Dining</h3>
+            <p class="service-desc">
+              Award-winning chefs crafting multi-course bespoke dinners in your private kitchen paired with rare vintages from grand cru cellars.
+            </p>
+            <span class="service-link" onclick="openDetailModal('service-michelin-chef')">
+              Reserve Culinary Evening &rarr;
+            </span>
+          </div>
+
+          <!-- Feature 4: Holistic Longevity Spas -->
+          <div class="service-card">
+            <div class="service-icon-box">💆</div>
+            <h3 class="service-title">Private Wellness Retreats</h3>
+            <p class="service-desc">
+              Thermal mineral baths, bespoke cryotherapy, and personalized cellular rejuvenation regimens tailored by longevity physicians.
+            </p>
+            <span class="service-link" onclick="openDetailModal('service-thermal-spa')">
+              Book Spa Session &rarr;
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         BESPOKE ITINERARY BUILDER (Custom Request)
+         ========================================================================= -->
+    <section class="bespoke-banner-section" id="bespoke">
+      <div class="container">
+        <div class="bespoke-card">
+          <div class="bespoke-left">
+            <span class="section-tag">Custom Itineraries</span>
+            <h3>Design Your Bespoke Journey</h3>
+            <p>
+              Have a multi-destination itinerary, private island buyout, or exclusive celebration in mind? Our senior travel directors curate custom itineraries tailored precisely to your schedule.
+            </p>
+
+            <div class="bespoke-perks">
+              <div class="bespoke-perk-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Direct 1-on-1 Dedicated Lifestyle Manager</span>
+              </div>
+              <div class="bespoke-perk-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Complimentary VIP Airport Tarmac Assistance</span>
+              </div>
+              <div class="bespoke-perk-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Exclusive Upgrades &amp; Guaranteed Early Check-In</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bespoke Inquiry Form -->
+          <form class="bespoke-form" id="bespokeForm">
+            <div class="form-group">
+              <label for="customName">Your Full Name</label>
+              <input type="text" id="customName" placeholder="e.g. Lord Alexander Sterling" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customEmail">Direct Email Address</label>
+              <input type="email" id="customEmail" placeholder="e.g. alexander@sterling.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customDestination">Preferred Destination(s)</label>
+              <input type="text" id="customDestination" placeholder="e.g. French Riviera, Swiss Alps, Kyoto" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customRequirements">Bespoke Requirements / Dates</label>
+              <textarea id="customRequirements" rows="3" placeholder="Tell us about your dates, private jet needs, yacht charter, or special celebrations..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 6px;">
+              Request Private Concierge Consultation
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CLIENT REVIEWS & TESTIMONIALS
+         ========================================================================= -->
+    <section class="testimonials-section" id="accolades">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Client Accolades</span>
+          <h2 class="section-title">Trusted by Discerning Travelers</h2>
+          <p class="section-desc">
+            Discover what our private members and global guests share about their Aura Luxe stays and concierge experiences.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Review 1 -->
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "The Matterhorn Royal Alpine Chalet was nothing short of breathtaking. Arriving by private helicopter directly to Zermatt, with our ski passes and in-chalet fondue ready upon entry, was perfection."
+            </p>
+            <div class="review-author">
+              <div class="author-avatar" style="display:flex; align-items:center; justify-content:center; color:var(--accent-gold); font-weight:700;">EC</div>
+              <div class="author-info">
+                <h5>Elena Rostova</h5>
+                <span>Zurich, Switzerland &bull; Alpine Chalet Guest</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "Chartering the Aurelia Superyacht along the Monaco coastline was the highlight of our summer. The onboard chef prepared unforgettable sea bass and caviar. Booking online was effortless."
+            </p>
+            <div class="review-author">
+              <div class="author-avatar" style="display:flex; align-items:center; justify-content:center; color:var(--accent-gold); font-weight:700;">MH</div>
+              <div class="author-info">
+                <h5>Marcus H. Vane</h5>
+                <span>London, United Kingdom &bull; Yacht Charter Member</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "The Bora Bora Overwater Sanctuary exceeded even 5-star expectations. Having a Polynesian butler coordinate morning reef snorkel trips while we worked remotely over crystal blue water is unmatched."
+            </p>
+            <div class="review-author">
+              <div class="author-avatar" style="display:flex; align-items:center; justify-content:center; color:var(--accent-gold); font-weight:700;">SK</div>
+              <div class="author-info">
+                <h5>Dr. Sophia Kim</h5>
+                <span>San Francisco, USA &bull; Bora Bora Guest</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         FREQUENTLY ASKED QUESTIONS (FAQ)
+         ========================================================================= -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Clear Answers</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">
+            Everything you need to know about reserving stays, private services, payment methods, and concierge privileges.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item active">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How does instant online booking work for high-end villas and yachts?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Every stay and service listed on Aura Luxe undergoes live inventory sync. Once you select your dates and confirm your reservation, your reservation code is instantly generated, calendar holds are applied, and your personal lifestyle concierge is assigned to contact you directly.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Can I customize add-on services like private chefs or airport transfers?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Yes, absolutely. During checkout, you can toggle bespoke add-on services such as VIP tarmac transfers, in-suite massage therapists, sommelier tastings, or helicopter charters. You can also message our 24/7 AI Concierge anytime to request custom additions.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What is your cancellation and modification policy?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              All bookings offer complimentary cancellation or date rescheduling up to 14 days prior to your arrival date. Cancellations can be performed conveniently in one click via your "My Reservations" tab.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What payment methods and currencies are accepted?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              We accept all major global credit cards (Visa, MasterCard, American Express Centurion), bank wire transfers, and verified cryptocurrency transfers for high-value charters. Use the currency switcher in the header to view live converted pricing in USD, EUR, GBP, JPY, or AED.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom: 12px;">
+            <div class="brand-icon">A</div>
+            <div>
+              <span class="brand-name">AURA LUXE</span>
+              <span class="brand-tagline">Hotels &amp; Concierge</span>
+            </div>
+          </div>
+          <p>
+            The world's foremost digital portal for bespoke private villa rentals, alpine sanctuaries, executive aviation, and curated culinary experiences.
+          </p>
+          <div style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">
+            ✦ Forbes Travel Guide &bull; Virtuoso Preferred Partner
+          </div>
+        </div>
+
+        <!-- Col 2: Destinations -->
+        <div class="footer-col">
+          <h4>Destinations</h4>
+          <ul>
+            <li><a href="#stays" onclick="document.getElementById('dockSearch').value='Bora Bora'; renderCatalog();">Bora Bora</a></li>
+            <li><a href="#stays" onclick="document.getElementById('dockSearch').value='Zermatt'; renderCatalog();">Zermatt &amp; Swiss Alps</a></li>
+            <li><a href="#stays" onclick="document.getElementById('dockSearch').value='Santorini'; renderCatalog();">Santorini &amp; Mykonos</a></li>
+            <li><a href="#stays" onclick="document.getElementById('dockSearch').value='Paris'; renderCatalog();">Paris &amp; French Riviera</a></li>
+            <li><a href="#stays" onclick="document.getElementById('dockSearch').value='Kyoto'; renderCatalog();">Kyoto &amp; Tokyo</a></li>
+            <li><a href="#stays" onclick="document.getElementById('dockSearch').value='Florence'; renderCatalog();">Florence &amp; Tuscany</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="footer-col">
+          <h4>VIP Services</h4>
+          <ul>
+            <li><a href="#services" onclick="openDetailModal('service-gulfstream-jet')">Private Jet Aviation</a></li>
+            <li><a href="#services" onclick="openDetailModal('service-aurelia-yacht')">Superyacht Charters</a></li>
+            <li><a href="#services" onclick="openDetailModal('service-michelin-chef')">Michelin In-Villa Dining</a></li>
+            <li><a href="#services" onclick="openDetailModal('service-thermal-spa')">Longevity Thermal Spas</a></li>
+            <li><a href="#services" onclick="openDetailModal('service-ferrari-chauffeur')">Exotic Car Chauffeurs</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Newsletter -->
+        <div class="footer-col">
+          <h4>Aura Privé Club</h4>
+          <div class="newsletter-box">
+            <p>Subscribe for exclusive off-market estate access and receive voucher code <strong>LUXE2026</strong> for 15% VIP privileges.</p>
+            <form class="newsletter-form" id="newsletterForm">
+              <input type="email" placeholder="Enter your email" required aria-label="Email address for newsletter" />
+              <button type="submit" class="btn btn-primary" style="padding: 10px 18px;">Join</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>&copy; 2026 Aura Luxe Global Hospitality Group. All rights reserved.</div>
+        <div style="display:flex; gap: 20px; align-items: center;">
+          <a href="#" style="color:var(--text-muted); text-decoration:none;">Privacy Policy</a>
+          <a href="#" style="color:var(--text-muted); text-decoration:none;">Terms of Service</a>
+          <a href="#" style="color:var(--text-muted); text-decoration:none;">Security &amp; Guarantee</a>
+          <a href="javascript:void(0)" onclick="promptOwnerLogin()" style="color:var(--text-muted); text-decoration:none; opacity:0.35; font-size:0.75rem;" title="Management Portal">Staff Access</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODAL: STAY / SERVICE DETAIL & LIVE BOOKING
+       ========================================================================= -->
+  <div class="modal-overlay" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeModal('detailModal')" aria-label="Close modal">✕</button>
+
+      <!-- Modal Hero Image -->
+      <div class="modal-gallery">
+        <img id="modalGalleryImg" src="" alt="Property Gallery" class="modal-gallery-img" />
+      </div>
+
+      <!-- Modal Body Grid -->
+      <div class="modal-body-grid">
+        <!-- Left: Information, Specs, Description & Add-ons -->
+        <div class="modal-info">
+          <h3 id="modalTitle">Luxury Experience</h3>
+          <div class="modal-loc" id="modalLocation">Location</div>
+          
+          <div class="modal-specs-bar" id="modalSpecs">
+            <!-- Dynamic specs -->
+          </div>
+
+          <p id="modalDescription" style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;">
+            Description
+          </p>
+
+          <!-- Addons Selection -->
+          <div class="modal-addons-box" id="modalAddons">
+            <!-- Dynamic Addons -->
+          </div>
+        </div>
+
+        <!-- Right: Interactive Checkout & Pricing Card -->
+        <div class="modal-checkout-card" id="modalCheckoutCard">
+          <div class="checkout-price-head">
+            <div>
+              <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Nightly / Session Rate</span>
+              <div class="checkout-rate" id="modalRate">$1,850</div>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--accent-emerald); font-weight: 700;">★ Best Rate Guaranteed</span>
+          </div>
+
+          <!-- Date Selectors -->
+          <div class="checkout-dates-box">
+            <div class="checkout-date-field">
+              <label for="modalCheckIn">Check-In</label>
+              <input type="date" id="modalCheckIn" />
+            </div>
+            <div class="checkout-date-field">
+              <label for="modalCheckOut">Check-Out</label>
+              <input type="date" id="modalCheckOut" />
+            </div>
+          </div>
+
+          <!-- Guest Info Form -->
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="guestName" placeholder="Lead Guest Full Name" required 
+                   style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:10px; color:var(--text-primary); font-size:0.85rem; outline:none;" />
+            <input type="email" id="guestEmail" placeholder="Email Address for Confirmation" required 
+                   style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:10px; color:var(--text-primary); font-size:0.85rem; outline:none;" />
+          </div>
+
+          <!-- Promo Code Row -->
+          <div class="promo-row">
+            <input type="text" id="promoInput" placeholder="Promo Code (e.g. LUXE2026)" />
+            <button type="button" class="btn btn-secondary" onclick="applyPromoCode()" style="padding: 8px 14px; font-size: 0.8rem;">
+              Apply
+            </button>
+          </div>
+
+          <!-- Live Breakdown Calculation -->
+          <div class="cost-breakdown">
+            <div class="cost-row">
+              <span id="costBaseLabel">Base Rate</span>
+              <span id="costBaseVal">$0</span>
+            </div>
+            <div class="cost-row">
+              <span>Selected VIP Add-ons</span>
+              <span id="costAddonsVal">$0</span>
+            </div>
+            <div class="cost-row" id="costDiscountRow" style="display:none; color:var(--accent-emerald);">
+              <span>VIP Privilege Discount</span>
+              <span id="costDiscountVal">-$0</span>
+            </div>
+            <div class="cost-row">
+              <span>Hospitality &amp; Luxury Tourism Tax (12%)</span>
+              <span id="costTaxVal">$0</span>
+            </div>
+            <div class="cost-total">
+              <span>Total Investment</span>
+              <span id="costGrandTotal">$0</span>
+            </div>
+          </div>
+
+          <!-- Interactive Payment Method Selection (Stripe, PayPal, Apple Pay, Bank Wire, Crypto) -->
+          <div class="checkout-payment-section" id="checkoutPaymentSection">
+            <!-- Dynamic Payment UI rendered by app.js based on Owner Settings -->
+          </div>
+
+          <!-- Action Button -->
+          <button class="btn btn-primary" id="confirmPaymentBtn" onclick="confirmReservation(event)" style="width: 100%; height: 50px; font-size: 1rem;">
+            Instant Reserve &bull; Guaranteed
+          </button>
+          <div style="text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 8px;">
+            🔒 256-Bit SSL Encrypted &bull; Free cancellation up to 14 days prior
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DRAWER: WISHLIST & MY BOOKINGS
+       ========================================================================= -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="if(event.target===this) closeDrawer();">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h3 id="drawerTitle">Saved Collection</h3>
+        <button class="btn-icon" onclick="closeDrawer()" aria-label="Close Drawer">✕</button>
+      </div>
+      <div class="drawer-body" id="drawerBody">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FLOATING AI CONCIERGE CHAT WIDGET
+       ========================================================================= -->
+  <button class="concierge-chat-toggle" id="chatToggleBtn" title="Aura AI Luxury Concierge" aria-label="Open Concierge Chat">
+    <span>✦</span>
+    <span class="concierge-chat-badge"></span>
+  </button>
+
+  <div class="chat-box-widget" id="chatBoxWidget">
+    <div class="chat-header">
+      <div class="chat-agent-info">
+        <div class="agent-status-dot"></div>
+        <div>
+          <h4>Aura Concierge AI</h4>
+          <span>24/7 Dedicated Assistance</span>
+        </div>
+      </div>
+      <button class="btn-icon" id="chatCloseBtn" style="width: 30px; height: 30px; font-size: 0.8rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble bot">
+        Greetings. I am your <strong>Aura Private Concierge</strong>. Whether you seek a romantic cliffside villa in Santorini, an alpine ski chalet with Matterhorn views, or a private jet charter, I am here to assist you.
+      </div>
+    </div>
+
+    <form class="chat-input-bar" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Ask about stays, yachts, promos..." required />
+      <button type="submit" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.82rem;">
+        Send
+      </button>
+    </form>
+  </div>
+
+  <!-- Floating Owner Portal Pill -->
+  <div class="owner-floating-pill" id="ownerFloatingPill">
+    <button class="btn-owner" onclick="openOwnerStudio()" style="padding: 5px 12px; font-size: 0.78rem;">
+      <span class="pulse-dot"></span>
+      <span>Owner Studio</span>
+    </button>
+    <label class="switch-label" title="Toggle Live Price Edit Badges on Catalog Cards" style="gap: 6px; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center;">
+      <input type="checkbox" id="ownerModeToggleCheckbox" class="switch-input" onchange="toggleOwnerMode(this.checked)">
+      <span class="switch-slider" style="width: 32px; height: 18px;"></span>
+      <span style="color: var(--text-secondary); font-size: 0.75rem;">Live Edit</span>
+    </label>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: OWNER STUDIO & MANAGEMENT PORTAL
+       ========================================================================= -->
+  <div class="admin-modal-overlay" id="ownerStudioModal" role="dialog" aria-modal="true" aria-labelledby="ownerStudioTitle">
+    <div class="admin-modal-container">
+      <!-- Admin Header -->
+      <div class="admin-header">
+        <div class="admin-title-box">
+          <div class="admin-icon-badge">⚡</div>
+          <div>
+            <h2 id="ownerStudioTitle">AURA LUXE &mdash; Owner Studio</h2>
+            <p>Full Website Control: Live Price Management, Payment Gateways &amp; Ledger</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <label class="switch-label" title="Show/Hide Quick Edit Badges on Catalog" style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; background: rgba(255,255,255,0.04); padding: 6px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle);">
+            <input type="checkbox" id="ownerModeStudioCheckbox" class="switch-input" onchange="toggleOwnerMode(this.checked)">
+            <span class="switch-slider" style="width: 32px; height: 18px;"></span>
+            <span style="color: var(--accent-gold-light); font-weight: 600;">Live Card Badges</span>
+          </label>
+          <button class="btn btn-secondary" onclick="logoutOwner()" style="padding: 6px 14px; font-size: 0.78rem; color: var(--accent-rose); border-color: rgba(244,63,94,0.4);" title="Lock Owner Studio and return to Customer View">🔒 Lock / Exit</button>
+          <button class="btn-icon" onclick="closeOwnerStudio()" aria-label="Close Owner Studio" style="width: 36px; height: 36px;">✕</button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="admin-nav-tabs">
+        <button class="admin-tab-btn active" id="tabBtnCatalog" onclick="switchAdminTab('catalog')">
+          <span>🏷️ Price &amp; Inventory</span>
+          <span class="badge-count" id="adminCatalogCount" style="position: static; margin-left: 4px;">11</span>
+        </button>
+        <button class="admin-tab-btn" id="tabBtnPayments" onclick="switchAdminTab('payments')">
+          <span>💳 Payment Gateways &amp; Methods</span>
+          <span style="color: var(--accent-emerald); font-size: 0.75rem; margin-left: 4px;">● Active</span>
+        </button>
+        <button class="admin-tab-btn" id="tabBtnLedger" onclick="switchAdminTab('ledger')">
+          <span>📊 Sales &amp; Bookings Ledger</span>
+          <span class="badge-count" id="adminBookingsCount" style="position: static; margin-left: 4px;">0</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Price & Catalog Control -->
+      <div class="admin-tab-content" id="tabContentCatalog">
+        <!-- Rendered by renderAdminCatalog() -->
+      </div>
+
+      <!-- Tab 2: Payment Gateways & Setup -->
+      <div class="admin-tab-content" id="tabContentPayments" style="display: none;">
+        <!-- Rendered by renderAdminPaymentSettings() -->
+      </div>
+
+      <!-- Tab 3: Sales & Bookings Ledger -->
+      <div class="admin-tab-content" id="tabContentLedger" style="display: none;">
+        <!-- Rendered by renderAdminLedger() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Owner Authentication / PIN Login Modal -->
+  <div class="modal-overlay" id="ownerLoginModal" role="dialog" aria-modal="true" style="z-index: 100001;">
+    <div class="modal-content" style="max-width: 400px; padding: 26px; text-align: center;">
+      <button class="modal-close-btn" onclick="closeModal('ownerLoginModal')">✕</button>
+      <div class="admin-icon-badge" style="width: 48px; height: 48px; margin: 0 auto 12px; font-size: 1.3rem;">🔒</div>
+      <h3 style="font-size: 1.25rem; margin: 0 0 6px;">Executive Management</h3>
+      <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 18px;">
+        Enter Master Security PIN to unlock Owner Studio &amp; live price controls.
+      </p>
+
+      <form onsubmit="submitOwnerLogin(event)">
+        <div style="margin-bottom: 16px;">
+          <input type="password" id="ownerPinInput" class="checkout-input" placeholder="Enter PIN (Default: admin123)" required 
+                 style="text-align: center; letter-spacing: 0.2em; font-size: 1.1rem; padding: 12px;" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 44px; font-size: 0.9rem;">
+          Unlock Owner Studio
+        </button>
+      </form>
+      <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 12px;">
+        💡 Default PIN: <strong style="color:var(--accent-gold);">admin123</strong> (Customizable in Studio)
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Price Edit Popup Modal -->
+  <div class="modal-overlay" id="quickPriceModal" role="dialog" aria-modal="true" style="z-index: 100000;">
+    <div class="modal-content" style="max-width: 440px; padding: 24px;">
+      <button class="modal-close-btn" onclick="closeModal('quickPriceModal')">✕</button>
+      <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px;">
+        <div style="font-size: 1.5rem;">🏷️</div>
+        <div>
+          <h3 id="quickPriceTitle" style="font-size: 1.1rem; margin: 0;">Update Price</h3>
+          <span id="quickPriceSub" style="font-size: 0.78rem; color: var(--text-muted);">Adjust Base Rate in USD</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">
+          Base Price ($ USD)
+        </label>
+        <div class="price-input-group" style="width: 100%; padding: 8px 12px;">
+          <span style="font-size: 1.1rem;">$</span>
+          <input type="number" id="quickPriceInput" class="price-input-field" style="font-size: 1.2rem;" min="1" step="10" />
+        </div>
+        <div style="display: flex; gap: 6px; margin-top: 10px;">
+          <button type="button" class="btn-mini-adjust" onclick="quickPriceDelta(-100)">-$100</button>
+          <button type="button" class="btn-mini-adjust" onclick="quickPriceDelta(100)">+$100</button>
+          <button type="button" class="btn-mini-adjust" onclick="quickPricePercent(-0.10)">-10%</button>
+          <button type="button" class="btn-mini-adjust" onclick="quickPricePercent(0.10)">+10%</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button class="btn btn-secondary" onclick="closeModal('quickPriceModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveQuickPrice()">Save Price</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Luxury Property / Service Modal -->
+  <div class="modal-overlay" id="addPropertyModal" role="dialog" aria-modal="true" style="z-index: 100000;">
+    <div class="modal-content" style="max-width: 650px; padding: 26px;">
+      <button class="modal-close-btn" onclick="closeModal('addPropertyModal')">✕</button>
+      <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 20px;">
+        <div class="admin-icon-badge" style="width: 38px; height: 38px; font-size: 1.1rem;">➕</div>
+        <div>
+          <h3 style="font-size: 1.2rem; margin: 0;">Add New Luxury Listing</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Create a custom 5-star villa, chalet, yacht, jet, or culinary experience</span>
+        </div>
+      </div>
+
+      <form id="addPropertyForm" onsubmit="saveNewProperty(event)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="gateway-field">
+            <label>Listing Title *</label>
+            <input type="text" id="newPropTitle" required placeholder="e.g. Royal Bel Air Estate" />
+          </div>
+          <div class="gateway-field">
+            <label>Location *</label>
+            <input type="text" id="newPropLocation" required placeholder="e.g. Beverly Hills, California" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="gateway-field">
+            <label>Type *</label>
+            <select id="newPropType">
+              <option value="stay">Luxury Stay</option>
+              <option value="service">VIP Service</option>
+            </select>
+          </div>
+          <div class="gateway-field">
+            <label>Category *</label>
+            <select id="newPropCategory">
+              <option value="villas">Private Villa</option>
+              <option value="chalets">Alpine Chalet</option>
+              <option value="penthouses">City Penthouse</option>
+              <option value="aviation-yachts">Aviation &amp; Superyacht</option>
+              <option value="dining">Michelin Dining</option>
+              <option value="wellness">Wellness Spa</option>
+            </select>
+          </div>
+          <div class="gateway-field">
+            <label>Price Rate ($ USD) *</label>
+            <input type="number" id="newPropPrice" required min="50" step="50" placeholder="2500" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="gateway-field">
+            <label>Price Unit</label>
+            <select id="newPropUnit">
+              <option value="night">per night</option>
+              <option value="charter">per charter</option>
+              <option value="flight">per flight</option>
+              <option value="evening">per evening</option>
+              <option value="session">per session</option>
+              <option value="day">per day</option>
+            </select>
+          </div>
+          <div class="gateway-field">
+            <label>Badge / Highlight Tag</label>
+            <input type="text" id="newPropBadge" placeholder="e.g. Private Helipad" />
+          </div>
+        </div>
+
+        <div class="gateway-field" style="margin-bottom: 12px;">
+          <label>Image URL *</label>
+          <input type="text" id="newPropImage" required placeholder="assets/images/overwater-villa.jpg or https://images.unsplash.com/..." value="assets/images/hero.jpg" />
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px;">
+          <div class="gateway-field">
+            <label>Guests</label>
+            <input type="number" id="newPropGuests" value="4" min="1" />
+          </div>
+          <div class="gateway-field">
+            <label>Beds</label>
+            <input type="number" id="newPropBeds" value="2" min="0" />
+          </div>
+          <div class="gateway-field">
+            <label>Baths</label>
+            <input type="number" id="newPropBaths" value="2" min="1" />
+          </div>
+          <div class="gateway-field">
+            <label>Size / Spec</label>
+            <input type="text" id="newPropSize" value="3,500 sq.ft" />
+          </div>
+        </div>
+
+        <div class="gateway-field" style="margin-bottom: 18px;">
+          <label>Description *</label>
+          <textarea id="newPropDesc" rows="3" required placeholder="Describe the exclusive experience, architecture, and luxury features..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('addPropertyModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Listing to Live Catalog</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+/* ==========================================================================
+   AURA LUXE — OWNER STUDIO & PAYMENT GATEWAYS STYLES
+   Ultra-Luxury Management Dashboard, Payment Methods & Interactive Checkout
+   ========================================================================== */
+
+/* Owner Studio Trigger in Navbar - HIDDEN BY DEFAULT FOR GUESTS */
+.btn-owner {
+  display: none !important;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(170, 132, 23, 0.35));
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold-light);
+  font-weight: 600;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+body.owner-authenticated .btn-owner {
+  display: inline-flex !important;
+}
+.btn-owner:hover {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+  color: #000;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
+}
+.btn-owner .pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-emerald);
+  animation: pulseEmerald 2s infinite;
+}
+@keyframes pulseEmerald {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+/* Floating Owner Portal Dock Pill - HIDDEN BY DEFAULT FOR GUESTS */
+.owner-floating-pill {
+  display: none !important;
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 998;
+  background: rgba(10, 15, 24, 0.92);
+  border: 1px solid var(--accent-gold);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  transition: all var(--transition-fast);
+}
+body.owner-authenticated .owner-floating-pill {
+  display: flex !important;
+}
+.owner-floating-pill:hover {
+  border-color: var(--accent-gold-light);
+  transform: translateY(-2px);
+}
+
+/* Owner Mode Inline Edit Badges on Property Cards - HIDDEN BY DEFAULT */
+.card-owner-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  background: rgba(10, 15, 24, 0.9);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: none !important;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: all var(--transition-fast);
+}
+.card-owner-badge:hover {
+  background: var(--accent-gold);
+  color: #000;
+  transform: scale(1.05);
+}
+body.owner-authenticated.owner-mode-active .card-owner-badge {
+  display: inline-flex !important;
+}
+
+/* Owner Studio Fullscreen / Large Modal */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(4, 7, 12, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+.admin-modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.admin-modal-container {
+  width: 100%;
+  max-width: 1100px;
+  max-height: 92vh;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: adminModalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes adminModalPop {
+  from { transform: scale(0.95) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Admin Modal Header */
+.admin-header {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(18, 25, 38, 0.6);
+}
+.admin-title-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.admin-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+}
+.admin-header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+.admin-header p {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Admin Tabs */
+.admin-nav-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 28px;
+  background: rgba(10, 15, 24, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+}
+.admin-tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 14px 20px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+.admin-tab-btn:hover {
+  color: var(--text-primary);
+}
+.admin-tab-btn.active {
+  color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+}
+
+/* Admin Body Content */
+.admin-tab-content {
+  padding: 24px 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Stats Ribbon */
+.admin-stats-ribbon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.admin-stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.admin-stat-card .stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.admin-stat-card .stat-val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-gold-light);
+  margin-top: 4px;
+}
+.admin-stat-card .stat-sub {
+  font-size: 0.75rem;
+  color: var(--accent-emerald);
+  margin-top: 4px;
+}
+
+/* Admin Controls Toolbar */
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+}
+
+/* Catalog Price Table */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+.admin-table th {
+  padding: 10px 14px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.admin-table-row {
+  background: rgba(255, 255, 255, 0.03);
+  transition: all var(--transition-fast);
+}
+.admin-table-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.admin-table-row td {
+  padding: 12px 14px;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.admin-table-row td:first-child {
+  border-top-left-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+}
+.admin-table-row td:last-child {
+  border-top-right-radius: var(--radius-sm);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.table-thumb {
+  width: 50px;
+  height: 42px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Editable Price Field */
+.price-input-group {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  width: 140px;
+}
+.price-input-group span {
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-right: 4px;
+}
+.price-input-field {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+/* Quick price adjustment buttons */
+.btn-mini-adjust {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  margin-left: 3px;
+  transition: all 0.15s;
+}
+.btn-mini-adjust:hover {
+  background: var(--accent-gold);
+  color: #000;
+  border-color: var(--accent-gold);
+}
+
+/* Toggle Switch */
+.switch-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.switch-input {
+  display: none;
+}
+.switch-slider {
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  position: relative;
+  transition: background 0.3s;
+  display: inline-block;
+}
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.3s;
+}
+.switch-input:checked + .switch-slider {
+  background: var(--accent-emerald);
+}
+.switch-input:checked + .switch-slider::before {
+  transform: translateX(20px);
+}
+
+/* Payment Gateway Settings Cards */
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.gateway-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: border-color var(--transition-fast);
+}
+.gateway-card:hover {
+  border-color: var(--border-gold);
+}
+.gateway-card.active {
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.03);
+}
+.gateway-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.gateway-title-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.gateway-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+.gateway-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.gateway-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gateway-field label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.gateway-field input, .gateway-field select, .gateway-field textarea {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+.gateway-field input:focus, .gateway-field select:focus, .gateway-field textarea:focus {
+  border-color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   CHECKOUT PAYMENT METHOD SELECTOR (CUSTOMER MODAL)
+   ========================================================================== */
+.checkout-payment-section {
+  margin: 16px 0 10px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 16px;
+}
+.payment-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.payment-section-header h4 {
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
+  margin: 0;
+}
+
+/* Payment Method Selection Pills */
+.payment-nav-pills {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+.payment-pill {
+  flex: 1;
+  min-width: 85px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+.payment-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+.payment-pill.active {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold-light);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Interactive Card Preview */
+.credit-card-preview {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #1c2638 0%, #0d131f 60%, #171d2b 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+.credit-card-preview::after {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+}
+.card-preview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-chip {
+  width: 34px;
+  height: 24px;
+  background: linear-gradient(135deg, #d4af37, #967417);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+.card-brand-logo {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold-light);
+}
+.card-preview-number {
+  font-family: monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.18em;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.card-preview-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+.card-preview-bottom strong {
+  display: block;
+  color: #fff;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* Card Inputs Layout */
+.card-inputs-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.card-input-full {
+  grid-column: span 3;
+}
+.checkout-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition-fast);
+}
+.checkout-input:focus {
+  border-color: var(--accent-gold);
+}
+
+/* Bank Wire Coordinates Box */
+.wire-details-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--border-gold);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 0.82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.wire-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wire-row span:first-child {
+  color: var(--text-muted);
+}
+.wire-row span:last-child {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: monospace;
+}
+
+/* Crypto Wallet Box */
+.crypto-details-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.crypto-address-pill {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-gold);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--accent-gold-light);
+  word-break: break-all;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* PayPal Button */
+.btn-paypal-checkout {
+  background: #ffc439;
+  color: #003087;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  width: 100%;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-paypal-checkout:hover {
+  background: #f4b400;
+  box-shadow: 0 4px 15px rgba(255, 196, 57, 0.35);
+}
+
+/* Apple Pay Button */
+.btn-applepay-checkout {
+  background: #000;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-applepay-checkout:hover {
+  background: #111;
+  border-color: #fff;
+}
+
+/* Quick Fill Test Mode Badge */
+.test-mode-banner {
+  background: rgba(234, 179, 8, 0.12);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  color: #facc15;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.btn-test-autofill {
+  background: rgba(234, 179, 8, 0.25);
+  border: 1px solid #facc15;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-test-autofill:hover {
+  background: #facc15;
+  color: #000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .admin-header {
+    padding: 16px;
+  }
+  .admin-tab-content {
+    padding: 16px;
+  }
+  .card-inputs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .card-inputs-grid .checkout-input:first-child {
+    grid-column: span 2;
+  }
+  .owner-floating-pill {
+    bottom: 16px;
+    left: 16px;
+  }
+}
